@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ post.title }}</h1>
+
+  {% if post.published_date %}
+    <h4><span class="glyphicon glyphicon-time" aria-hidden="true"></span>{{ post.published_date }}</h4>
+    <br>
+    <img src= "{{post.image.url}}" class="imr-responsive  center-block" style="max-height:300px;" />
+    <br><br>
+    <p>{{post.body}}</p>
+  {% else %}
+    <a class="btn btn-success" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+  <br><br>
+  <a class="btn btn-info" href="{% url 'post_edit' post.pk %}"> Edit Blog Post</a>
+   &nbsp; &nbsp;
+  <a class="btn btn-danger" href="{% url 'post_delete' post.pk %}"> Delete Blog Post</a>
+  {% endif %}
+
+  <div id="disqus_thread">
+    <script>
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = 'post-{{ post.id }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ajithblog.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+{% endblock %}
+
+<!-- Note:
+ If we name context_object_name in views.py the we have to use that name in template rendering
+ insted of   post.pk   we use   context_object_name.pk.
+But default context name is post-->

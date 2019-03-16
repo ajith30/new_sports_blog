@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1 class="text-center">Welcome to Sport's Blog!</h1>
+  {% load static %}
+  <img src="{% static 'posts/home.jpg' %}" class="imr-responsive  center-block" style="max-height:300px;" />
+
+  <h2>latest Posts</h2>
+  <hr>
+  {% for post in post_list %}
+
+  <a href="{% url 'post_detail' post.pk %}"><h3>{{post.title}}</h3></a>
+  <h4><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{ post.published_date }}</h4>
+  <br>
+  <img src= "{{post.image.url}}" class="imr-responsive  center-block" style="max-height:150px;" />
+  <br>
+  <p>{{post.summary}}</p>
+  <br>
+  <br>
+  {% endfor %}
+
+{% endblock %}

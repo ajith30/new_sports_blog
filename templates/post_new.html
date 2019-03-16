@@ -1,0 +1,16 @@
+<!-- templates/post_new.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<form class=""  method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input class="btn btn-info" type="submit" name="" value="Save">
+</form>
+{% endblock content %}
+
+
+
+<!-- Then to output our form data we use {{ form.as_p }} which renders it
+within paragraph <p> tags. -->
