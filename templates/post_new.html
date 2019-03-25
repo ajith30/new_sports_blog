@@ -2,10 +2,12 @@
 
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 <form class=""  method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  {{ form.as_p }}
+  {{ form|crispy }}
   <input class="btn btn-info" type="submit" name="" value="Save">
 </form>
 {% endblock content %}
@@ -13,4 +15,6 @@
 
 
 <!-- Then to output our form data we use {{ form.as_p }} which renders it
-within paragraph <p> tags. -->
+within paragraph <p> tags.
+If we use crispy forms by replacing {{form.as_p}} with {{form|crispy}} it will give nice structured fields/bootstrap fields  
+-->
